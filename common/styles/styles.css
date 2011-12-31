@@ -1,0 +1,178 @@
+/* CSS Reset Based on Boiler Plate */
+article, aside, details, figcaption, figure, footer, header, hgroup, nav, section { display:block; }
+audio, canvas, video { display:inline-block; *display:inline; *zoom:1; }
+audio:not([controls]) { display:none; }
+[hidden] { display:none; }
+
+html { font-size:100%; overflow-y:scroll; -webkit-text-size-adjust:100%; -ms-text-size-adjust:100%; }
+body { background:#fff; margin:0; font:62.5%/1 Arial,Verdana,serif; }
+body, button, input, select, textarea { color:#333; font-family:Arial,Verdana,serif; }
+
+::-moz-selection { background:#407627; color:#fff; text-shadow:none; }
+::selection { background:#407627; color:#fff; text-shadow:none; }
+
+a:focus { outline:thin dotted; }
+a:hover, a:active { outline:0; }
+
+abbr[title] { border-bottom:1px dotted; }
+b, strong { font-weight:bold; }
+blockquote { margin:1em 40px; }
+dfn { font-style:italic; }
+hr { display:block; height:1px; border:0; border-top:1px solid #ccc; margin:1em 0; padding:0; }
+ins { background:#ff9; color:#000; text-decoration:none; }
+mark { background:#ff0; color:#000; font-style:italic; font-weight:bold; }
+pre, code, kbd, samp { font-family:monospace, monospace; _font-family:'courier new', monospace; font-size:1em; }
+pre { white-space:pre; white-space:pre-wrap; word-wrap:break-word; }
+q { quotes:none; }
+q:before, q:after { content:""; content:none; }
+small { font-size:85%; }
+sub, sup { font-size:75%; line-height:0; position:relative; vertical-align:baseline; }
+sup { top:-0.5em; }
+sub { bottom:-0.25em; }
+ul, ol { margin:1em 0; padding:0 0 0 40px; }
+dd { margin:0 0 0 40px; }
+nav ul, nav ol { list-style:none; list-style-image:none; margin:0; padding:0; }
+img { border:0; -ms-interpolation-mode:bicubic; vertical-align:middle; }
+svg:not(:root) { overflow:hidden; }
+figure { margin:0; }
+
+/*----------------------------------------------------------------------------------------------------------
+#############################################  TYPOGRAPHY
+----------------------------------------------------------------------------------------------------------*/
+h1, h2, h3, h4, h5, h6 { font-weight:900; margin:0 0 20px; }
+h1 {  }
+h2 {  }
+    li h2 {  } /*reset font size back to what it should be*/
+h3 {  }
+    li h3 {  } /*reset font size back to what it should be*/
+h4 {  }
+    li h4 {  } /*reset font size back to what it should be*/
+h5 {  }
+    li h5 {  } /*reset font size back to what it should be*/
+h6 {  }
+    li h6 {  } /*reset font size back to what it should be*/
+p, li, dt, dd { font-size:1.4em; line-height:1.286; }
+p { margin:0 0 20px; }
+    li p, td p, li li { font-size:1em; } /*reset font size back to what it should be*/
+ul, ol { margin:0 0 20px; padding:0 0 0 24px; }
+ul ul { list-style:disc; }
+ol { list-style:decimal; }
+li { margin:0 0 5px; }
+ul li {  }
+ol li {  }
+dl { margin:0 0 20px; padding:0; }
+dt,
+dd { margin:0; padding:0; }
+dt {  }
+dd {  }
+a, a:active { color:#407627; text-decoration:none; }
+a:hover, a:focus { color:#407627; text-decoration:underline; }
+blockquote { margin:0 0 20px; padding:0 }
+    blockquote p { margin:0; }
+address { margin:0 0 20px; padding:0 }
+    address p { margin:0; }
+
+/*# TYPE EXTENSIONS #*/
+
+/*----------------------------------------------------------------------------------------------------------
+############################################# TABLES
+----------------------------------------------------------------------------------------------------------*/
+table { border-collapse:collapse; border-spacing:0; margin:0 0 20px; width:100%; }
+tbody {  }
+tfoot {  }
+thead tr {  }
+tbody tr {  }
+tbody tr:nth-child(2n+2) {  }
+tr {  }
+th, td { vertical-align:top; }
+th {  }
+td {  }
+
+/*# TABLE EXTENSIONS #*/
+
+/*----------------------------------------------------------------------------------------------------------
+############################################# FORMS 
+----------------------------------------------------------------------------------------------------------*/
+/*# FORMS RESETS #*/
+form { margin:0; }
+fieldset { border:0; margin:0; padding:0; }
+label { cursor:pointer; }
+legend { border:0; *margin-left:-7px; padding:0; }
+button, input, select, textarea { font-size:100%; margin:0; vertical-align:baseline; *vertical-align:middle; }
+button, input { line-height:normal; *overflow:visible; }
+table button, table input { *overflow:auto; }
+button, input[type="button"], input[type="reset"], input[type="submit"] { cursor:pointer; -webkit-appearance:button; }
+input[type="checkbox"], input[type="radio"] { box-sizing:border-box; }
+input[type="search"] { -webkit-appearance:textfield; -moz-box-sizing:content-box; -webkit-box-sizing:content-box; box-sizing:content-box; }
+input[type="search"]::-webkit-search-decoration { -webkit-appearance:none; }
+button::-moz-focus-inner, input::-moz-focus-inner { border:0; padding:0; }
+textarea { overflow:auto; vertical-align:top; resize:vertical; }
+input:valid, textarea:valid {  }
+input:invalid, textarea:invalid { background-color:#f0dddd; }
+
+/* Just in case this is a .net solution use fieldset instead of form */
+fieldset { border:0; width:100% }
+fieldset ol { list-style:none; margin:0; overflow:hidden; padding:0; }
+fieldset li { font-size:1em; margin:0; }
+fieldset label { display:block; }
+    /* inline labels */
+    fieldset label.inline-label { display:inline; float:none; vertical-align:middle; width:auto; }
+/* field types, classes used so that ie6 applies the styles to the inputs with out fail */
+fieldset .text-field, 
+fieldset .select { background:#fff; border:solid 1px #999; color:#fff; float:left; }
+fieldset .text-field { padding:5px 10px }
+fieldset .select { padding:1px }
+    fieldset .text-field:focus, 
+    fieldset .text-field.focus, 
+    fieldset .select:focus, 
+    fieldset .select.focus { background-color:#ccc; border-color:#333; outline:none; }
+fieldset input.checkbox, 
+fieldset input.radiobutton { display:inline; vertical-align:middle; }
+fieldset input::-webkit-input-placeholder,
+fieldset .placeholder { color:#ccc; }
+
+/*----------------------------------------------------------------------------------------------------------
+############################################# STRUCTURE 
+----------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------
+############################################# FURNITURE 
+----------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------
+############################################# OBJECTS / ELEMENTS / PAGES
+----------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------
+#############################################  PLUGIN STYLING
+----------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------
+############################################# GLOBAL HELPERS
+----------------------------------------------------------------------------------------------------------*/
+.ir { display:block; border:0; text-indent:-999em; overflow:hidden; background-color:transparent; background-repeat:no-repeat; text-align:left; direction:ltr; }
+.ir br { display:none; }
+.hidden { display:none !important; visibility:hidden; }
+.visuallyhidden { border:0; clip:rect(0 0 0 0); height:1px; margin:-1px; overflow:hidden; padding:0; position:absolute; width:1px; }
+.visuallyhidden.focusable:active, .visuallyhidden.focusable:focus { clip:auto; height:auto; margin:0; overflow:visible; position:static; width:auto; }
+.invisible { visibility:hidden; }
+.off-screen-left { margin-left:-9999px; }
+.off-screen-right { margin-right:-9999px; }
+.clearfix:before, .clearfix:after { content:""; display:table; }
+.clearfix:after { clear:both; }
+.clearfix { zoom:1; }
+
+/*----------------------------------------------------------------------------------------------------------
+############################################# ALTERNATIVE LAYOUTS
+----------------------------------------------------------------------------------------------------------*/
+@media only screen and (max-width:1024px) {
+    html { -webkit-text-size-adjust:none; -ms-text-size-adjust:none; } 
+}
+
+@media only screen and (max-width:782px) {
+    
+}
+
+@media only screen and (max-width:480px) {
+    
+}
