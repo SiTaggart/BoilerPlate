@@ -20,6 +20,7 @@ var st = window.st;
         init: function() {
             this.$tweetWidget = $('.widget-twitter');
             this.$tweetList = this.$tweetWidget.find('#tweet-list');
+
             //fill defaults
             this.account = (this.$tweetWidget.data('account')) ? this.$tweetWidget.data('account') : this.account;
             this.limit = this.$tweetWidget.data('limit');
@@ -35,10 +36,8 @@ var st = window.st;
 
         determineURL: function() {
             var baseURL;
-
             if(this.queryType === 'user') baseURL = this.apiURLs.user;
             else baseURL = this.apiURLs.search;
-
             return baseURL;
         },
 
@@ -63,13 +62,11 @@ var st = window.st;
             }
             
             if(this.lastTweetId) params.since_id = this.lastTweetId;
-            params.include_entities = 'true'
-            params.callback = '?';
+            params.include_entities = 'true';
             return params;
         },
 
         pullTweets: function() {
-
             var self = this,
                 url = this.determineURL(),
                 params = this.determineParams();
@@ -80,7 +77,6 @@ var st = window.st;
                 dataType: 'jsonp',
                 type: 'GET',
                 success: function(data, textStatus, jqXHR){
-                    var tmp;
                     self.responseData = data;
                 },
                 error: function(){
@@ -88,6 +84,11 @@ var st = window.st;
                 },
                 complete: function(){
                     self.handleResponse('success');
+                    if(self.refreshResults) {
+                        setTimeout(function(){
+                            self.pullTweets();
+                        }, 10000);
+                    }
                 }
             });
 
@@ -102,12 +103,34 @@ var st = window.st;
                 case 'success':
                     if(!this.lastTweetId) this.$tweetList.append($('<ul/>'));
 
+                    var tweetsData = [],
+                        tmplData = {};
+
                     if(this.queryType === 'user') { 
-                        this.renderTweets(this.responseData);
+                        for (var i = this.responseData.length - 1; i >= 0; i--) {
+                            tmplData = {
+                                text: this.responseData[i].text,
+                                user: this.account,
+                                id: this.responseData[i].id_str,
+                                date: this.responseData[i].created_at,
+                                source: this.responseData[i].source
+                            };
+                            tweetsData.push(tmplData);
+                        };
                     }
                     else { 
-                        this.renderTweets(this.responseData.results);
+                        for (var i = this.responseData.results.length - 1; i >= 0; i--) {
+                            tmplData = {
+                                text: this.responseData.results[i].text,
+                                user: this.responseData.results[i].from_user,
+                                id: this.responseData.results[i].id_str,
+                                date: this.responseData.results[i].created_at,
+                                source: this.responseData.results[i].source
+                            };
+                            tweetsData.push(tmplData);
+                        };
                     }
+                    this.renderTweets(tweetsData);
 
                     this.$tweetWidget.find('.tweet-list-placeholder').fadeOut().remove(); 
                 break;
@@ -121,16 +144,28 @@ var st = window.st;
         renderTweets: function(d) {
             var self = this,
                 tmp, tweet, meta, action;
-            console.log(d);
+
             $.each(d, function (i, tweet) {
                 tmp = self.tweetify(tweet.text);
-                tweetText = '<p>' + tmp + '</p>';
-                meta = '<span class="tweet-list-time"><a href="https://twitter.com/#!/'+ tweet.from_user +'/status/'+ tweet.id +'">' + getTime.relative(tweet.created_at) + '</a> via ' + tweet.source + '</p>';
-                action = '<span class="tweet-list-action"><a href="https://twitter.com/intent/retweet?tweet_id='+ tweet.id +'">retweet</a></span>';
-                self.$tweetList.find('ul').append(
+                tweetText = getTweetText(tmp);
+                meta = getMetaText(tweet);
+                action = getActions(tweet);
+                self.$tweetList.find('ul').prepend(
                     $('<li>', { 'html': tweetText + meta + action })
                 );
+                //set last tweet id
+                self.lastTweetId = tweet.id;
             });
+
+            function getTweetText(t){
+                return '<p>' + t + '</p>';
+            }
+            function getMetaText(tweet){
+                return (self.showMeta) ? '<span class="tweet-list-time"><a href="https://twitter.com/#!/'+ tweet.user +'/status/'+ tweet.id +'">' + getTime.relative(tweet.date) + '</a> via ' + tweet.source + '</span>' : '';
+            }
+            function getActions(tweet){
+                return (self.showActions) ? '<span class="tweet-list-action"><a href="https://twitter.com/intent/retweet?tweet_id='+ tweet.id +'">retweet</a></span>' : '';
+            }
         }
     }
     
