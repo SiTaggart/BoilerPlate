@@ -1,0 +1,47 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Twitter Example</title>
+    <meta name="author" content="Simon Taggart">    
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="/common/styles/grid.css" media="all">
+    <link rel="stylesheet" href="/common/styles/styles.css" media="all">
+    <link rel="stylesheet" href="/common/styles/Print.css" media="print">
+    <script src="/common/scripts/libs/modernizr-2.0.6.min.js"></script>
+    <script src="/common/scripts/script.js"></script> 
+</head>
+<body>
+
+    <div class="site-wrapper">
+        <code>
+            <pre>
+                &lt;section class="widget-twitter" data-meta="true" data-actions="true" data-search="from:barackobama OR from:attackwatch" data-limit="4" data-account="sitaggart"&gt;                            
+                    &lt;div id="tweet-list">&lt;/div&gt;
+                    &lt;p class="tweet-list-placeholder"&gt;You don&rsquo;t have JavaScript enabled or the Internet broke. Either way you won&rsquo;t see our bird language&hellip;&lt;/p&gt;
+                &lt;/section&gt;
+            </pre>
+        </code>
+        <section class="widget-twitter" data-meta="true" data-actions="true" data-refresh="false" data-querytype="user" data-search="from:barackobama OR from:attackwatch" data-limit="5" data-account="orchardonline">                            
+            <div id="tweet-list"></div>
+            <p class="tweet-list-placeholder">You don&rsquo;t have JavaScript enabled or the Internet broke. Either way you won&rsquo;t see our bird language&hellip;</p>
+        </section>
+    </div>
+
+    <script>
+        window._gaq = [['_setAccount','UA-XXXXXXXX-X'],['_trackPageview'],['_trackPageLoadTime']];
+        Modernizr.load({
+          load: ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js'
+        });
+    </script>
+    <!--[if lt IE 7 ]>
+    <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
+    <script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
+    <![endif]-->
+</body>
+</html>

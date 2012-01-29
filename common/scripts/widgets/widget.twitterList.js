@@ -4,47 +4,134 @@ var st = window.st;
 (function($) {
     st.twitterList = {  
 
-        username: "",
-        numberOfTweets: 1,
+        account: '',
+        limit: 1,
+        showMeta: false,
+        showActions: false,
+        refreshResults: false,
+        queryType: 'user',
+        searchTerm: '',
+
+        apiURLs: {
+            user: 'https://api.twitter.com/1/statuses/user_timeline.json',
+            search: 'https://search.twitter.com/search.json'
+        },
 
         init: function() {
-            var $tweetWidget = $('.widget-twitter');
-            this.$tweetList = $('#tweet-list');
-            this.numberOfTweets = $tweetWidget.data('number-tweets');
-            this.username = $tweetWidget.data('twitter-account');
-            $(".tweet-list-placeholder").html('Talking to the Twitter internets&hellip;');
+            this.$tweetWidget = $('.widget-twitter');
+            this.$tweetList = this.$tweetWidget.find('#tweet-list');
+            //fill defaults
+            this.account = (this.$tweetWidget.data('account')) ? this.$tweetWidget.data('account') : this.account;
+            this.limit = this.$tweetWidget.data('limit');
+            this.showMeta = (this.$tweetWidget.data('meta')) ? this.$tweetWidget.data('meta') : this.showMeta;
+            this.showActions = (this.$tweetWidget.data('actions')) ? this.$tweetWidget.data('actions') : this.showActions;
+            this.refreshResults = (this.$tweetWidget.data('refresh')) ? this.$tweetWidget.data('refresh') : this.refreshResults;
+            this.queryType = (this.$tweetWidget.data('querytype')) ? this.$tweetWidget.data('querytype') : this.queryType;
+            this.searchTerm = (this.$tweetWidget.data('search')) ? this.$tweetWidget.data('search') : this.searchTerm;
+
+            this.$tweetWidget.find('.tweet-list-placeholder').html('Talking to the Twitter internets&hellip;');
             this.pullTweets();
+        },
+
+        determineURL: function() {
+            var baseURL;
+
+            if(this.queryType === 'user') baseURL = this.apiURLs.user;
+            else baseURL = this.apiURLs.search;
+
+            return baseURL;
+        },
+
+        determineParams: function() {
+            var params = {};
+
+            switch(this.queryType){
+                case 'user':
+                    params = {
+                        screen_name: this.account,
+                        count: this.limit
+                    }
+                break;
+                case 'search':
+                    params = {
+                        q: this.searchTerm,
+                        rpp: this.limit,
+                        result_type: 'recent'
+                    }
+                break;
+                default:                     
+            }
+            
+            if(this.lastTweetId) params.since_id = this.lastTweetId;
+            params.include_entities = 'true'
+            params.callback = '?';
+            return params;
         },
 
         pullTweets: function() {
 
             var self = this,
-                url = 'http://twitter.com/statuses/user_timeline/' + this.username + '.json?callback=?',
-                params = {
-                    count: this.numberOfTweets
-                };
+                url = this.determineURL(),
+                params = this.determineParams();
 
-            this.$tweetList.append($('<ul/>'))
-
-            $.getJSON(url, params, function (json) {
-                var tmp;
-                $.each(json, function (i, tweet) {
-                    tmp = self.tweetify(tweet.text);
-                    self.$tweetList.find('ul').append(
-                        $('<li>', { 'html': '<p>' + tmp + '</p><p class="tweet-list-time">' + getTime.relative(tweet.created_at) + ' via ' + tweet.source + '</p>' })
-                    );
-                });
-            }).error(function() { 
-                self.$tweetList.html('<p>Don&rsquo;t judge us, but something broke. <a href="http://twitter.com/intent/orchardonline">Follow us here in the meantime</a>.</p>'); 
-            }).complete(function() { 
-                $(".tweet-list-placeholder").fadeOut().remove(); 
+            $.ajax({
+                url: url,
+                data: params,
+                dataType: 'jsonp',
+                type: 'GET',
+                success: function(data, textStatus, jqXHR){
+                    var tmp;
+                    self.responseData = data;
+                },
+                error: function(){
+                    self.handleResponse('error');
+                },
+                complete: function(){
+                    self.handleResponse('success');
+                }
             });
 
-            this.tweetify = function (str) {
-                return str.replace(/(https?:\/\/\S+)/gi, '<a href="$1">$1</a>').replace(/(^|\s)@(\w+)/g, '$1<a href="http://twitter.com/$2">@$2</a>').replace(/(^|\s)#(\w+)/g, '$1<a href="http://search.twitter.com/search?q=%23$2">#$2</a>');
-            };
-        }    
+        },
 
+        tweetify: function (str) {
+            return str.replace(/(https?:\/\/\S+)/gi, '<a href="$1">$1</a>').replace(/(^|\s)@(\w+)/g, '$1<a href="http://twitter.com/$2">@$2</a>').replace(/(^|\s)#(\w+)/g, '$1<a href="http://search.twitter.com/search?q=%23$2">#$2</a>');
+        },
+        
+        handleResponse: function(type) {
+            switch(type){
+                case 'success':
+                    if(!this.lastTweetId) this.$tweetList.append($('<ul/>'));
+
+                    if(this.queryType === 'user') { 
+                        this.renderTweets(this.responseData);
+                    }
+                    else { 
+                        this.renderTweets(this.responseData.results);
+                    }
+
+                    this.$tweetWidget.find('.tweet-list-placeholder').fadeOut().remove(); 
+                break;
+                case 'error':
+                    this.$tweetList.html('<p>Don&rsquo;t judge us, but something broke.</p>'); 
+                break;
+                default:                    
+            }            
+        },
+
+        renderTweets: function(d) {
+            var self = this,
+                tmp, tweet, meta, action;
+            console.log(d);
+            $.each(d, function (i, tweet) {
+                tmp = self.tweetify(tweet.text);
+                tweetText = '<p>' + tmp + '</p>';
+                meta = '<span class="tweet-list-time"><a href="https://twitter.com/#!/'+ tweet.from_user +'/status/'+ tweet.id +'">' + getTime.relative(tweet.created_at) + '</a> via ' + tweet.source + '</p>';
+                action = '<span class="tweet-list-action"><a href="https://twitter.com/intent/retweet?tweet_id='+ tweet.id +'">retweet</a></span>';
+                self.$tweetList.find('ul').append(
+                    $('<li>', { 'html': tweetText + meta + action })
+                );
+            });
+        }
     }
     
     //lifted from https://github.com/remy/twitterlib/blob/master/twitterlib.js Thanks Remy
