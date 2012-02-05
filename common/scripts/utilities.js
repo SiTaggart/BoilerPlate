@@ -15,22 +15,23 @@ st.getUrlParam = function(name){
     var regexS = "[\\?&]"+name+"=([^&#]*)";
     var regex = new RegExp( regexS );
     var results = regex.exec( window.location.href );
-    if( results == null )
+    if( results === null )
         return "";
     else
         return results[1];
-}
+};
 
 /* Cookie functions */
 st.createCookie = function(name,value,days){
+    var expires;
     if(days){
         var date = new Date();
         date.setTime(date.getTime()+(days*24*60*60*1000));
-        var expires = "; expires="+date.toGMTString();
+        expires = "; expires="+date.toGMTString();
     }
-    else var expires = "";
+    else expires = "";
     document.cookie = name+"="+value+expires+"; path=/";
-}
+};
 st.readCookie = function(name){
     var nameEQ = name + "=";
     var ca = document.cookie.split(';');
@@ -40,14 +41,14 @@ st.readCookie = function(name){
         if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length,c.length);
     }
     return null;
-}
+};
 st.eraseCookie = function(name) {
     st.createCookie(name,"",-1);
-}
+};
 
 window.onerror = function(msg, url, linenumber){
     st.trackUserEvent('JS Exception', msg, url + ' ' + linenumber);
-}
+};
 st.trackUserEvent = function(cat, action, label){
     console.log('tracking: ', cat, action, label);
     _gaq.push(['_trackEvent',
@@ -55,6 +56,6 @@ st.trackUserEvent = function(cat, action, label){
         action, //event action
         label //event label
     ]);
-}
+};
 
 

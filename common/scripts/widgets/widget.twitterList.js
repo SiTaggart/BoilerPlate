@@ -1,7 +1,10 @@
 if (!window.st) window.st = {};
 var st = window.st;
+/*
+* Written by Simon Taggart @sitaggart 2012
+*/
 
-(function($) {
+!function($){
     st.twitterList = {  
 
         account: '',
@@ -150,8 +153,8 @@ var st = window.st;
                 tweetText = getTweetText(tmp);
                 meta = getMetaText(tweet);
                 action = getActions(tweet);
-                self.$tweetList.find('ul').prepend(
-                    $('<li>', { 'html': tweetText + meta + action })
+                self.$tweetList.find('> ul').prepend(
+                    '<li>' + tweetText + meta + action +'</li>'
                 );
                 //set last tweet id
                 self.lastTweetId = tweet.id;
@@ -164,7 +167,7 @@ var st = window.st;
                 return (self.showMeta) ? '<span class="tweet-list-time"><a href="https://twitter.com/#!/'+ tweet.user +'/status/'+ tweet.id +'">' + getTime.relative(tweet.date) + '</a> via ' + tweet.source + '</span>' : '';
             }
             function getActions(tweet){
-                return (self.showActions) ? '<span class="tweet-list-action"><a href="https://twitter.com/intent/retweet?tweet_id='+ tweet.id +'">retweet</a></span>' : '';
+                return (self.showActions) ? '<ul><li class="tweet-list-action"><a href="https://twitter.com/intent/retweet?tweet_id='+ tweet.id +'">retweet</a></li></ul>' : '';
             }
         }
     }
@@ -268,4 +271,4 @@ var st = window.st;
       };
     }();    
 
-})(jQuery);
+}(window.jQuery);
