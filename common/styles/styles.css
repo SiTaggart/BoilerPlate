@@ -1,19 +1,18 @@
-/* CSS Reset Based on Boiler Plate */
+/* HTML5 Boilerplate normalize */
 article, aside, details, figcaption, figure, footer, header, hgroup, nav, section { display:block; }
 audio, canvas, video { display:inline-block; *display:inline; *zoom:1; }
 audio:not([controls]) { display:none; }
 [hidden] { display:none; }
-
-html { font-size:100%; overflow-y:scroll; -webkit-text-size-adjust:100%; -ms-text-size-adjust:100%; }
-body { background:#fff; margin:0; font:62.5%/1 Arial,Verdana,serif; }
-body, button, input, select, textarea { color:#333; font-family:Arial,Verdana,serif; }
-
-::-moz-selection { background:#407627; color:#fff; text-shadow:none; }
-::selection { background:#407627; color:#fff; text-shadow:none; }
-
+html { font-size:100%; -webkit-text-size-adjust:100%; -ms-text-size-adjust:100%; }
+html, button, input, select, textarea { font-family:sans-serif; color:#222; }
+body { margin:0; font-size:1em; line-height:1.4; }
+::-moz-selection { background:#fe57a1; color:#fff; text-shadow:none; }
+::selection { background:#fe57a1; color:#fff; text-shadow:none; }
+a { color:#00e; }
+a:visited { color:#551a8b; }
+a:hover { color:#06e; }
 a:focus { outline:thin dotted; }
 a:hover, a:active { outline:0; }
-
 abbr[title] { border-bottom:1px dotted; }
 b, strong { font-weight:bold; }
 blockquote { margin:1em 40px; }
@@ -21,7 +20,7 @@ dfn { font-style:italic; }
 hr { display:block; height:1px; border:0; border-top:1px solid #ccc; margin:1em 0; padding:0; }
 ins { background:#ff9; color:#000; text-decoration:none; }
 mark { background:#ff0; color:#000; font-style:italic; font-weight:bold; }
-pre, code, kbd, samp { font-family:monospace, monospace; _font-family:'courier new', monospace; font-size:1em; }
+pre, code, kbd, samp { font-family:monospace, serif; _font-family:'courier new', monospace; font-size:1em; }
 pre { white-space:pre; white-space:pre-wrap; word-wrap:break-word; }
 q { quotes:none; }
 q:before, q:after { content:""; content:none; }
@@ -35,10 +34,30 @@ nav ul, nav ol { list-style:none; list-style-image:none; margin:0; padding:0; }
 img { border:0; -ms-interpolation-mode:bicubic; vertical-align:middle; }
 svg:not(:root) { overflow:hidden; }
 figure { margin:0; }
+form { margin:0; }
+fieldset { border:0; margin:0; padding:0; }
+label { cursor:pointer; }
+legend { border:0; *margin-left:-7px; padding:0; white-space:normal; }
+button, input, select, textarea { font-size:100%; margin:0; vertical-align:baseline; *vertical-align:middle; }
+button, input { line-height:normal; }
+button, input[type="button"], input[type="reset"], input[type="submit"] { cursor:pointer; -webkit-appearance:button; *overflow:visible; }
+button[disabled], input[disabled] { cursor:default; }
+input[type="checkbox"], input[type="radio"] { box-sizing:border-box; padding:0; *width:13px; *height:13px; }
+input[type="search"] { -webkit-appearance:textfield; -moz-box-sizing:content-box; -webkit-box-sizing:content-box; box-sizing:content-box; }
+input[type="search"]::-webkit-search-decoration, input[type="search"]::-webkit-search-cancel-button { -webkit-appearance:none; }
+button::-moz-focus-inner, input::-moz-focus-inner { border:0; padding:0; }
+textarea { overflow:auto; vertical-align:top; resize:vertical; }
+input:valid, textarea:valid {  }
+input:invalid, textarea:invalid { background-color:#f0dddd; }
+table { border-collapse:collapse; border-spacing:0; }
+td { vertical-align:top; }
+.chromeframe { margin:0.2em 0; background:#ccc; color:black; padding:0.2em 0; }
 
 /*----------------------------------------------------------------------------------------------------------
 #############################################  TYPOGRAPHY
 ----------------------------------------------------------------------------------------------------------*/
+body { background:#fff; color:#333; font:62.5%/17px Arial, Helvetica, sans-serif; -webkit-font-smoothing:antialiased; }
+
 h1, h2, h3, h4, h5, h6 { font-weight:900; margin:0 0 20px; }
 h1 {  }
 h2 {  }
@@ -77,57 +96,57 @@ address { margin:0 0 20px; padding:0 }
 /*----------------------------------------------------------------------------------------------------------
 ############################################# TABLES
 ----------------------------------------------------------------------------------------------------------*/
-table { border-collapse:collapse; border-spacing:0; margin:0 0 20px; width:100%; }
-tbody {  }
-tfoot {  }
-thead tr {  }
-tbody tr {  }
-tbody tr:nth-child(2n+2) {  }
-tr {  }
-th, td { vertical-align:top; }
-th {  }
-td {  }
+table { border-collapse:collapse; border-spacing:0; margin:0 0 18px; padding:0; width:100% }
+    table th, table td { border-top:1px solid #ddd; font-size:1.3em; line-height:18px; padding:8px; text-align:left; }
+    table th { font-weight:bold; vertical-align:bottom; }
+    table td { vertical-align:top; }
+    table thead:first-child tr th, table thead:first-child tr td { border-top:0; }
+    table tbody + tbody { border-top:2px solid #ddd; }
+.table-bordered { *border-collapse:collapsed; border-collapse:separate; border:1px solid #ddd; }
+    .table-bordered th + th,
+    .table-bordered td + td,
+    .table-bordered th + td,
+    .table-bordered td + th { border-left:1px solid #ddd; }
+    .table-bordered thead:first-child tr:first-child th, .table-bordered tbody:first-child tr:first-child th, .table-bordered tbody:first-child tr:first-child td { border-top:0; }
+.table-striped tbody tr:nth-child(odd) td, .table-striped tbody tr:nth-child(odd) th { background-color:#f9f9f9; }
 
 /*# TABLE EXTENSIONS #*/
 
 /*----------------------------------------------------------------------------------------------------------
 ############################################# FORMS 
 ----------------------------------------------------------------------------------------------------------*/
-/*# FORMS RESETS #*/
-form { margin:0; }
-fieldset { border:0; margin:0; padding:0; }
-label { cursor:pointer; }
-legend { border:0; *margin-left:-7px; padding:0; }
-button, input, select, textarea { font-size:100%; margin:0; vertical-align:baseline; *vertical-align:middle; }
-button, input { line-height:normal; *overflow:visible; }
-table button, table input { *overflow:auto; }
-button, input[type="button"], input[type="reset"], input[type="submit"] { cursor:pointer; -webkit-appearance:button; }
-input[type="checkbox"], input[type="radio"] { box-sizing:border-box; }
-input[type="search"] { -webkit-appearance:textfield; -moz-box-sizing:content-box; -webkit-box-sizing:content-box; box-sizing:content-box; }
-input[type="search"]::-webkit-search-decoration { -webkit-appearance:none; }
+/*# RESET #*/
+button, input, select, textarea { font-size:100%; margin:0; vertical-align:middle; }
+button, input { *overflow:visible; line-height:normal; }
 button::-moz-focus-inner, input::-moz-focus-inner { border:0; padding:0; }
-textarea { overflow:auto; vertical-align:top; resize:vertical; }
-input:valid, textarea:valid {  }
-input:invalid, textarea:invalid { background-color:#f0dddd; }
+button, input[type="button"], input[type="reset"], input[type="submit"] { -webkit-appearance:button; cursor:pointer; height:auto; width:auto; }
+input[type="search"] { -moz-box-sizing:content-box; -webkit-appearance:textfield; -webkit-box-sizing:content-box; box-sizing:content-box; }
+    input[type="search"]::-webkit-search-decoration, input[type="search"]::-webkit-search-cancel-button { -webkit-appearance:none; }
+textarea { overflow:auto; vertical-align:top; }
+input[type=checkbox], input[type=radio] { border:none; cursor:pointer; height:auto; line-height:normal; margin:3px 10px 3px 0; *margin-top:0; padding:0; width:auto; }
+input,textarea,select{-moz-border-radius:3px;-webkit-border-radius:3px;border:1px solid #ccc;border-radius:3px;color:#808080;display:inline-block;padding:4px;width:210px}
+select{padding:initial}
+input[type=file] { background-color:#ffffff; border:initial; -webkit-box-shadow:none; -moz-box-shadow:none; box-shadow:none; line-height:initial; padding:initial; }
+select, input[type=file] { *height:auto; line-height:27px; *margin-top:4px; }
+input[disabled], select[disabled], textarea[disabled], input[readonly], select[readonly], textarea[readonly] { background-color:#f5f5f5; border-color:#ddd; cursor:not-allowed; }
+input[type=button],input[type=reset],input[type=submit]{background:noneheight:auto;width:auto}
+select,input[type=file]{height:auto;line-height:27px;margin-top:4px}
+select[multiple]{background-color:#ffffff;height:inherit}
+textarea{height:auto}
+input:focus,textarea:focus{-moz-box-shadow:inset 0 1px 3px rgba(0,0,0,0.1), 0 0 8px rgba(82,168,236,0.6);-webkit-box-shadow:inset 0 1px 3px rgba(0,0,0,0.1), 0 0 8px rgba(82,168,236,0.6);border-color:rgba(82,168,236,0.8);box-shadow:inset 0 1px 3px rgba(0,0,0,0.1), 0 0 8px rgba(82,168,236,0.6);outline:0}
+input[type=file]:focus,input[type=checkbox]:focus,select:focus{-moz-box-shadow:none;-webkit-box-shadow:none;box-shadow:none;outline:1px dotted #666}
 
-/* Just in case this is a .net solution use fieldset instead of form */
-fieldset { border:0; width:100% }
-fieldset ol { list-style:none; margin:0; overflow:hidden; padding:0; }
-fieldset li { font-size:1em; margin:0; }
-fieldset label { display:block; }
-    /* inline labels */
+fieldset { border:0; margin-bottom:20px; width:100% }
+    fieldset ol { list-style:none; margin:0 }
+    fieldset li { margin-bottom:10px; }
+    fieldset label { display:block; }
     fieldset label.inline-label { display:inline; float:none; vertical-align:middle; width:auto; }
-/* field types, classes used so that ie6 applies the styles to the inputs with out fail */
-fieldset .text-field, 
-fieldset .select { background:#fff; border:solid 1px #999; color:#fff; float:left; }
-fieldset .text-field { padding:5px 10px }
-fieldset .select { padding:1px }
-    fieldset .text-field:focus, 
-    fieldset .text-field.focus, 
-    fieldset .select:focus, 
-    fieldset .select.focus { background-color:#ccc; border-color:#333; outline:none; }
-fieldset input.checkbox, 
-fieldset input.radiobutton { display:inline; vertical-align:middle; }
+    fieldset legend { color:#404040; display:block; font-size:19.5px; line-height:1; padding-left:150px; }
+     .ie6 fieldset legend { padding:0 0 5px 145px; line-height:1.5 }
+     .ie7 fieldset legend { padding:0 0 5px 145px; line-height:1.5 }
+    fieldset.small { width:105px }
+    fieldset.medium { width:210px }
+    fieldset.large { width:447px }
 fieldset input::-webkit-input-placeholder,
 fieldset .placeholder { color:#ccc; }
 
@@ -142,10 +161,70 @@ fieldset .placeholder { color:#ccc; }
 /*----------------------------------------------------------------------------------------------------------
 ############################################# OBJECTS / ELEMENTS / PAGES
 ----------------------------------------------------------------------------------------------------------*/
+/*# BREADCRUMB #*/
+.breadcrumb { margin:0 0 20px; }
+.breadcrumb-list { list-style:none; margin:0; padding:0; }
+    .breadcrumb li { display:inline; margin-right:5px; }
+    .breadcrumb a { text-decoration:none; }
+    .breadcrumb a:after { content:'>'; margin-left:5px; }
+    .breadcrumb .current a {  }
 
+/*# PAGINATION #*/
+.pagination { margin:0 0 20px; overflow:hidden }
+    .pagination-list { border:1px solid #eee; float:left; list-style:none; margin:0; padding:0; }
+    .pagination-list li { display:inline }
+        .pagination-list a { border-right:1px #eee solid; float:left; line-height:2.4; padding:0 14px; text-decoration:none }
+        .pagination-list a:hover,
+        .pagination-list a:focus, 
+        .pagination-list .current a { color:#333; background-color:#eee }
+        .pagination-list .next a { border:0 }
+        .pagination-list .prev a {  }
+
+/*# MEDIA LISTS #*/
+.media-group {  }
+    .media-list { list-style:none; margin:0; padding:0; }
+        .media-group .media-list {  }
+    .media-list-item { border-bottom:1px solid #dae2e7; margin:0 0 20px; min-height:1px; padding:0; position:relative; }
+        .media-list-item:after { content:"."; display:block; height:0; clear:both; visibility:hidden }
+        .media-list-item:last-child { border:none; }
+        .media-list-item h3 {  }
+            .media-list-item h3 a {  }
+        .media-list .figure { float:left; padding:0 20px 20px 0; }
+        .media-list-item ul { float:left }
+.more { color:#0093D0; display:block; font-size:1.2em; font-weight:bold; margin:0 0 10px 0; text-decoration:none; }
 /*----------------------------------------------------------------------------------------------------------
 #############################################  PLUGIN STYLING
 ----------------------------------------------------------------------------------------------------------*/
+/*# OM SIMPLE TABS #*/
+.om-tabs .om-tab-list { border-bottom:solid 1px #ccc; margin:0; min-height:1px; padding:0; }
+    .om-tabs .om-tab-list:after { clear:both; content:"."; display:block; height:0; visibility:hidden; }    
+    .om-tabs .om-tab-list-item { float:left; font-size:1em; list-style:none; margin:0; padding:0; }
+    .om-tabs .om-tab-heading { background:#ccc; border:1px solid #ccc; color:#fff; cursor:pointer; font-size:1.3em; margin:0 3px -1px; padding:5px 10px; position:relative; z-index:9; }
+        .om-tabs .om-tab-heading-inactive { color:#ccc; background:#eee; cursor:default; }
+        .om-tabs .om-tab-list-item-valid .om-tab-heading { background:#45b223; }
+        .om-tabs .om-tab-list-item-invalid .om-tab-heading { background:#EF3718; }
+        .om-tabs .om-tab-list-item-active .om-tab-heading { background:#fff; border-bottom-color:#fff; color:#333; }
+    .om-tabs-active .om-tab-panel { display:none; }
+    .om-tabs-active .om-tab-panel-active { display:block; }
+    .om-tab-panel {  }
+
+/*# SIMPLE SLIDER #*/
+.om-slider-container { margin:20px 0; }
+    .js .om-slider-container { opacity:0; }
+    .om-slider-container.om-slider-loaded { opacity:1; }
+    .om-slider-list-container { overflow:hidden; position:relative; }
+        .js .om-slider-list-container { height:300px; }
+    .om-slider-list { list-style:none; margin:0; padding:0; 
+                    -webkit-transition:all 500ms ease;
+                    -moz-transition:all 500ms ease;
+                    -o-transition:all 500ms ease;
+                    transition:all 500ms ease;}
+        .om-slider-loaded .om-slider-list { position:absolute }
+        .om-slider-list li { float:left; font-size:1em; margin-bottom:0; padding:0; width:940px; }
+        .om-slider-next,
+        .om-slider-prev { border:none; }
+            .om-slider-button-inactive { cursor:default; opacity:.4 }
+                .om-slider-button-inactive:hover { background-position:0 0!important }
 
 /*----------------------------------------------------------------------------------------------------------
 ############################################# GLOBAL HELPERS
@@ -166,7 +245,9 @@ fieldset .placeholder { color:#ccc; }
 ############################################# ALTERNATIVE LAYOUTS
 ----------------------------------------------------------------------------------------------------------*/
 @media only screen and (max-width:1024px) {
-    html { -webkit-text-size-adjust:none; -ms-text-size-adjust:none; } 
+    html { -webkit-text-size-adjust:none; -ms-text-size-adjust:none; }
+    /* *{ box-sizing:border-box } FTW http://paulirish.com/2012/box-sizing-border-box-ftw/ */
+    * { -moz-box-sizing:border-box; -webkit-box-sizing:border-box; box-sizing:border-box; } 
 }
 
 @media only screen and (max-width:782px) {
@@ -175,4 +256,22 @@ fieldset .placeholder { color:#ccc; }
 
 @media only screen and (max-width:480px) {
     
+}
+
+/*----------------------------------------------------------------------------------------------------------
+#############################################  PRINT 
+----------------------------------------------------------------------------------------------------------*/
+@media print {
+    * { background:transparent !important; color:black !important; box-shadow:none !important; text-shadow:none !important; filter:none !important; -ms-filter:none !important; } 
+    a, a:visited { text-decoration:underline; }
+    a[href]:after { content:" (" attr(href) ")"; }
+    abbr[title]:after { content:" (" attr(title) ")"; }
+    .ir a:after, a[href^="javascript:"]:after, a[href^="#"]:after { content:""; } 
+    pre, blockquote { border:1px solid #999; page-break-inside:avoid; }
+    thead { display:table-header-group; } 
+    tr, img { page-break-inside:avoid; }
+    img { max-width:100% !important; }
+    @page { margin:0.5cm; }
+    p, h2, h3 { orphans:3; widows:3; }
+    h2, h3 { page-break-after:avoid; }
 }
